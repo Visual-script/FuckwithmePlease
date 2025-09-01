@@ -1,15 +1,34 @@
--- Speed X Hub Loading Screen with Repeating Warnings and Credit
+-- Author Protection
+local AUTHOR_NAME = "TEAMATECANCER"
+
+if not AUTHOR_NAME or AUTHOR_NAME ~= "TEAMATECANCER" then
+	error("This script has been modified! Author name missing. Stopping execution.")
+end
+
 local player = game.Players.LocalPlayer
 local PlayerGui = player:WaitForChild("PlayerGui")
-
 local screenGui = Instance.new("ScreenGui")
 screenGui.Parent = PlayerGui
 
+-- Display upper author name
+local authorLabel = Instance.new("TextLabel")
+authorLabel.Size = UDim2.new(0.6, 0, 0.15, 0)
+authorLabel.Position = UDim2.new(0.2, 0, 0.05, 0)
+authorLabel.BackgroundTransparency = 1
+authorLabel.Text = "-TEAMATECANCER\n-TEAMATECANCER -TEAMATECANCER\n-TEAMATECANCER\n-TEAMATECANCER"
+authorLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+authorLabel.Font = Enum.Font.GothamBold
+authorLabel.TextSize = 28
+authorLabel.TextWrapped = true
+authorLabel.Parent = screenGui
+
+-- Function to show a red warning tab
 local function showTab(text, duration)
 	local redBox = Instance.new("Frame")
 	redBox.Size = UDim2.new(0.6, 0, 0.3, 0)
 	redBox.Position = UDim2.new(0.2, 0, 0.35, 0)
 	redBox.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+	redBox.BackgroundTransparency = 0.2
 	redBox.BorderSizePixel = 4
 	redBox.BorderColor3 = Color3.fromRGB(255, 255, 255)
 	redBox.Parent = screenGui
@@ -18,7 +37,7 @@ local function showTab(text, duration)
 	warningText.Size = UDim2.new(1, -20, 1, -20)
 	warningText.Position = UDim2.new(0, 10, 0, 10)
 	warningText.BackgroundTransparency = 1
-	warningText.Text = text
+	warningText.Text = text .. "\n\nTEAMATECANCER TEAMATECANCER TEAMATECANCER TEAMATECANCER TEAMATECANCER"
 	warningText.TextColor3 = Color3.fromRGB(255, 255, 255)
 	warningText.Font = Enum.Font.GothamBold
 	warningText.TextSize = 28
@@ -29,7 +48,30 @@ local function showTab(text, duration)
 	redBox:Destroy()
 end
 
-local function showLoadingScreen()
+-- Fake Math Text (middle of screen)
+local function fakeMathText()
+	local fakeFrame = Instance.new("Frame")
+	fakeFrame.Size = UDim2.new(0.5, 0, 0.1, 0)
+	fakeFrame.Position = UDim2.new(0.25, 0, 0.45, 0)
+	fakeFrame.BackgroundTransparency = 1
+	fakeFrame.Parent = screenGui
+
+	local textLabel = Instance.new("TextLabel")
+	textLabel.Size = UDim2.new(1, 0, 1, 0)
+	textLabel.Position = UDim2.new(0, 0, 0, 0)
+	textLabel.BackgroundTransparency = 1
+	textLabel.Text = "Solve 20 to skip the Loading"
+	textLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+	textLabel.Font = Enum.Font.GothamBold
+	textLabel.TextSize = 28
+	textLabel.TextWrapped = true
+	textLabel.Parent = fakeFrame
+
+	return fakeFrame -- Keep the frame so we can destroy it after loading
+end
+
+-- Loading screen function
+local function showLoadingScreen(fakeTextFrame)
 	local mainFrame = Instance.new("Frame")
 	mainFrame.Size = UDim2.new(0.6, 0, 0.4, 0)
 	mainFrame.Position = UDim2.new(0.2, 0, 0.3, 0)
@@ -72,7 +114,7 @@ local function showLoadingScreen()
 	infoText.Size = UDim2.new(1, 0, 0.2, 0)
 	infoText.Position = UDim2.new(0, 0, 0.55, 0)
 	infoText.BackgroundTransparency = 1
-	infoText.Text = "Wait 5 min – Checking data...\nScript made by AhmadV99"
+	infoText.Text = "Wait 5 min – Checking data...\nScript made by TEAMATECANCER TEAMATECANCER TEAMATECANCER TEAMATECANCER TEAMATECANCER"
 	infoText.Font = Enum.Font.GothamBold
 	infoText.TextSize = 22
 	infoText.TextColor3 = Color3.fromRGB(200, 200, 200)
@@ -100,14 +142,18 @@ local function showLoadingScreen()
 		progressBar.Size = UDim2.new(i/100, 0, 1, 0)
 	end
 
+	-- Destroy fake math text after loading is done
+	if fakeTextFrame then
+		fakeTextFrame:Destroy()
+	end
+
 	mainFrame:Destroy()
 end
 
--- ==============================
--- LOOP TABS AND LOADING SCREEN
--- ==============================
+-- LOOP: Repeat Tabs + Fake Math + Loading Screen
 while true do
 	showTab("⚠️ WARNING ⚠️\nDon't abuse the Script — Causing a Ban!", 5)
 	showTab("⚠️ WARNING ⚠️\nBeware of Stealer Script!", 5)
-	showLoadingScreen()
+	local fakeText = fakeMathText()
+	showLoadingScreen(fakeText)
 end
