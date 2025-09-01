@@ -1,0 +1,139 @@
+-- Speed X Hub Loading Screen with Multiple Warnings
+local player = game.Players.LocalPlayer
+local PlayerGui = player:WaitForChild("PlayerGui")
+
+-- ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Parent = PlayerGui
+
+-- ==============================
+-- TAB 1: WARNING DELTA (5 SECONDS)
+-- ==============================
+local redBox1 = Instance.new("Frame")
+redBox1.Size = UDim2.new(0.6, 0, 0.3, 0)
+redBox1.Position = UDim2.new(0.2, 0, 0.35, 0)
+redBox1.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+redBox1.BorderSizePixel = 4
+redBox1.BorderColor3 = Color3.fromRGB(255, 255, 255)
+redBox1.Parent = screenGui
+
+local warningText1 = Instance.new("TextLabel")
+warningText1.Size = UDim2.new(1, -20, 1, -20)
+warningText1.Position = UDim2.new(0, 10, 0, 10)
+warningText1.BackgroundTransparency = 1
+warningText1.Text = "⚠️ WARNING ⚠️\nDon't use Delta — causing a Ban to your account!"
+warningText1.TextColor3 = Color3.fromRGB(255, 255, 255)
+warningText1.Font = Enum.Font.GothamBold
+warningText1.TextSize = 28
+warningText1.TextWrapped = true
+warningText1.Parent = redBox1
+
+task.wait(5)
+redBox1:Destroy()
+
+-- ==============================
+-- TAB 2: WARNING STEALER SCRIPT (5 SECONDS)
+-- ==============================
+local redBox2 = Instance.new("Frame")
+redBox2.Size = UDim2.new(0.6, 0, 0.3, 0)
+redBox2.Position = UDim2.new(0.2, 0, 0.35, 0)
+redBox2.BackgroundColor3 = Color3.fromRGB(200, 0, 0)
+redBox2.BorderSizePixel = 4
+redBox2.BorderColor3 = Color3.fromRGB(255, 255, 255)
+redBox2.Parent = screenGui
+
+local warningText2 = Instance.new("TextLabel")
+warningText2.Size = UDim2.new(1, -20, 1, -20)
+warningText2.Position = UDim2.new(0, 10, 0, 10)
+warningText2.BackgroundTransparency = 1
+warningText2.Text = "⚠️ WARNING ⚠️\nBeware of Stealer Script!"
+warningText2.TextColor3 = Color3.fromRGB(255, 255, 255)
+warningText2.Font = Enum.Font.GothamBold
+warningText2.TextSize = 28
+warningText2.TextWrapped = true
+warningText2.Parent = redBox2
+
+task.wait(5)
+redBox2:Destroy()
+
+-- ==============================
+-- TAB 3: LOADING SCREEN
+-- ==============================
+local mainFrame = Instance.new("Frame")
+mainFrame.Size = UDim2.new(0.6, 0, 0.4, 0)
+mainFrame.Position = UDim2.new(0.2, 0, 0.3, 0)
+mainFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+mainFrame.BackgroundTransparency = 0.3
+mainFrame.BorderSizePixel = 4
+mainFrame.BorderColor3 = Color3.fromRGB(255, 255, 255)
+mainFrame.Parent = screenGui
+
+-- Glass Shine Gradient
+local gradient = Instance.new("UIGradient")
+gradient.Color = ColorSequence.new{
+	ColorSequenceKeypoint.new(0, Color3.fromRGB(60, 60, 60)), 
+	ColorSequenceKeypoint.new(0.5, Color3.fromRGB(20, 20, 20)), 
+	ColorSequenceKeypoint.new(1, Color3.fromRGB(0, 0, 0))
+}
+gradient.Rotation = 90
+gradient.Parent = mainFrame
+
+-- Title
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0.2, 0)
+title.Position = UDim2.new(0, 0, 0, 0)
+title.BackgroundTransparency = 1
+title.Text = "Speed X Hub"
+title.Font = Enum.Font.GothamBold
+title.TextSize = 36
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.Parent = mainFrame
+
+-- Loading Text
+local loadingText = Instance.new("TextLabel")
+loadingText.Size = UDim2.new(1, 0, 0.25, 0)
+loadingText.Position = UDim2.new(0, 0, 0.25, 0)
+loadingText.BackgroundTransparency = 1
+loadingText.Text = "Loading... 0%"
+loadingText.Font = Enum.Font.GothamSemibold
+loadingText.TextSize = 26
+loadingText.TextColor3 = Color3.fromRGB(255, 255, 255)
+loadingText.Parent = mainFrame
+
+-- Info Text
+local infoText = Instance.new("TextLabel")
+infoText.Size = UDim2.new(1, 0, 0.2, 0)
+infoText.Position = UDim2.new(0, 0, 0.55, 0)
+infoText.BackgroundTransparency = 1
+infoText.Text = "Wait 5 min – Checking data..."
+infoText.Font = Enum.Font.GothamBold
+infoText.TextSize = 22
+infoText.TextColor3 = Color3.fromRGB(200, 200, 200)
+infoText.Parent = mainFrame
+
+-- Progress Bar Background
+local progressBg = Instance.new("Frame")
+progressBg.Size = UDim2.new(0.8, 0, 0.1, 0)
+progressBg.Position = UDim2.new(0.1, 0, 0.8, 0)
+progressBg.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+progressBg.BackgroundTransparency = 0.4
+progressBg.BorderSizePixel = 2
+progressBg.BorderColor3 = Color3.fromRGB(255, 255, 255)
+progressBg.Parent = mainFrame
+
+-- Progress Bar
+local progressBar = Instance.new("Frame")
+progressBar.Size = UDim2.new(0, 0, 1, 0)
+progressBar.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+progressBar.BorderSizePixel = 0
+progressBar.Parent = progressBg
+
+-- Fake Loading Progress (5 min = 300s)
+for i = 1, 100 do
+	task.wait(3)
+	loadingText.Text = "Loading... " .. i .. "%"
+	progressBar.Size = UDim2.new(i/100, 0, 1, 0)
+end
+
+-- Remove GUI after done
+screenGui:Destroy()
